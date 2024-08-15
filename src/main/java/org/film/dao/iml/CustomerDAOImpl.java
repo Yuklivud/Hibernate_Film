@@ -74,11 +74,33 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public void updateCustomer(Customer customer) {
-
+        Transaction tx = null;
+        try(Session session = sessionFactory.openSession()){
+            tx = session.getTransaction();
+            tx.begin();
+            session.update(customer);
+            tx.commit();
+        } catch (Throwable e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void deleteCustomer(Customer customer) {
-
+        Transaction tx = null;
+        try(Session session = sessionFactory.openSession()){
+            tx = session.getTransaction();
+            tx.begin();
+            session.delete(customer);
+            tx.commit();
+        } catch (Throwable e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 }
