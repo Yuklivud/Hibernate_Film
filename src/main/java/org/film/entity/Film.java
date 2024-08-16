@@ -10,6 +10,7 @@ import java.time.Instant;
 public class Film {
     @Id
     @Column(name = "film_id", columnDefinition = "smallint UNSIGNED not null")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "title", nullable = false, length = 128)
