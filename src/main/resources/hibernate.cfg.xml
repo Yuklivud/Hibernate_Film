@@ -12,5 +12,24 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="org.film.entity.Actor"/>
+        <mapping class="org.film.entity.Address"/>
+        <mapping class="org.film.entity.Category"/>
+        <mapping class="org.film.entity.City"/>
+        <mapping class="org.film.entity.Country"/>
+        <mapping class="org.film.entity.Customer"/>
+        <mapping class="org.film.entity.Film"/>
+        <mapping class="org.film.entity.FilmActor"/>
+        <mapping class="org.film.entity.FilmActorId"/>
+        <mapping class="org.film.entity.FilmCategory"/>
+        <mapping class="org.film.entity.FilmCategoryId"/>
+        <mapping class="org.film.entity.FilmText"/>
+        <mapping class="org.film.entity.Inventory"/>
+        <mapping class="org.film.entity.Language"/>
+        <mapping class="org.film.entity.Payment"/>
+        <mapping class="org.film.entity.Rental"/>
+        <mapping class="org.film.entity.Staff"/>
+        <mapping class="org.film.entity.Store"/>
     </session-factory>
 </hibernate-configuration>
