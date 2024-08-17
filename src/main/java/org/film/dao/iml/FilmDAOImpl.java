@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class FilmDAOImpl implements FilmDAO {
@@ -101,6 +102,13 @@ public class FilmDAOImpl implements FilmDAO {
         } catch (Throwable e){
             if(tx != null) tx.rollback();
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Film> getAllFilms() {
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("from Film").list();
         }
     }
 }
