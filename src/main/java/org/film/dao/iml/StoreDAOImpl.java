@@ -1,6 +1,7 @@
 package org.film.dao.iml;
 
 
+import com.sun.source.tree.TryTree;
 import org.film.dao.interfaces.StoreDAO;
 import org.film.entity.*;
 import org.film.hibernate.HibernateUtil;
@@ -78,16 +79,32 @@ public class StoreDAOImpl implements StoreDAO {
 
     @Override
     public void updateStoreById(Store store) {
-
+        Transaction tx = null;
+        try(Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            session.update(store);
+            tx.commit();
+        } catch (Throwable e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void deleteStoreById(Store store) {
-
+        Transaction tx = null;
+        try(Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            session.delete(store);
+            tx.commit();
+        } catch (Throwable e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Store getStoreById(int id) {
-        return null;
+        try(Session session = sessionFactory.openSession()) {
+            return session.get(Store.class, id);
+        }
     }
 }
