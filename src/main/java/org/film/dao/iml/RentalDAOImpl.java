@@ -1,6 +1,7 @@
 package org.film.dao.iml;
 
 
+import org.film.dao.interfaces.RentalDAO;
 import org.film.entity.Customer;
 import org.film.entity.Film;
 import org.film.entity.Inventory;
@@ -12,8 +13,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.time.Instant;
+import java.util.List;
 
-public class RentalDAOImpl {
+public class RentalDAOImpl implements RentalDAO {
     private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     public void returnMovie(int customerId, int filmId) {
@@ -38,6 +40,59 @@ public class RentalDAOImpl {
             rental.setReturnDate(Instant.now());
             session.update(rental);
 
+            tx.commit();
+        } catch (Throwable e){
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void saveRental(Rental rental) {
+        Transaction tx = null;
+        try(Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            session.save(rental);
+            tx.commit();
+        } catch (Throwable e){
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Rental getRental(int id) {
+        try(Session session = sessionFactory.openSession()) {
+            return session.get(Rental.class, id);
+        }
+    }
+
+    @Override
+    public List<Rental> getAllRentals() {
+        try(Session session = sessionFactory.openSession()) {
+            return session.createQuery("from Rental").list();
+        }
+    }
+
+    @Override
+    public void updateRental(Rental rental) {
+        Transaction tx = null;
+        try(Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            session.update(rental);
+            tx.commit();
+        } catch (Throwable e){
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteRental(int id) {
+        Transaction tx = null;
+        try(Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            session.delete(getRental(id));
             tx.commit();
         } catch (Throwable e){
             if (tx != null) tx.rollback();
