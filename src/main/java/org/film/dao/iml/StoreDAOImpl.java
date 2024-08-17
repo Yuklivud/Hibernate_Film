@@ -1,7 +1,6 @@
 package org.film.dao.iml;
 
 
-import com.sun.source.tree.TryTree;
 import org.film.dao.interfaces.StoreDAO;
 import org.film.entity.*;
 import org.film.hibernate.HibernateUtil;
@@ -12,6 +11,7 @@ import org.hibernate.Transaction;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 
 public class StoreDAOImpl implements StoreDAO {
     private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -105,6 +105,13 @@ public class StoreDAOImpl implements StoreDAO {
     public Store getStoreById(int id) {
         try(Session session = sessionFactory.openSession()) {
             return session.get(Store.class, id);
+        }
+    }
+
+    @Override
+    public List<Store> getAllStores() {
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("from Store").list();
         }
     }
 }
