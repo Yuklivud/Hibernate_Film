@@ -5,9 +5,9 @@ import org.film.entity.Customer;
 import java.util.List;
 
 public interface CustomerDAO {
-    public void saveCustomer(Customer customer);
-    public Customer getCustomerById(int id);
-    public List<Customer> getALlCustomers();
-    public void updateCustomer(Customer customer);
-    public void deleteCustomer(Customer customer);
+    void saveCustomer(Customer customer);
+    Customer getCustomerById(int id);
+    List<Customer> getALlCustomers();
+    void updateCustomer(Customer customer);
+    void deleteCustomer(Customer customer);
 }

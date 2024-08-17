@@ -5,9 +5,9 @@ import org.film.entity.Store;
 import java.util.List;
 
 public interface StoreDAO {
-    public void saveStoreById(Store store);
-    public void updateStoreById(Store store);
-    public void deleteStoreById(Store store);
-    public Store getStoreById(int id);
-    public List<Store> getAllStores();
+    void saveStoreById(Store store);
+    void updateStoreById(Store store);
+    void deleteStoreById(Store store);
+    Store getStoreById(int id);
+    List<Store> getAllStores();
 }
